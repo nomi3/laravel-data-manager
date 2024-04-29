@@ -17,7 +17,12 @@ class InsuredFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'first_name_kana' => fake()->firstKanaName(),
+            'last_name_kana' => fake()->lastKanaName(),
+            'insurance_card_symbol' => fake()->randomNumber(4),
+            'insurance_card_number' => fake()->randomNumber(8),
         ];
     }
 }

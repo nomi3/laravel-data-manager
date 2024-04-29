@@ -24,4 +24,18 @@ class InsuredControllerTest extends TestCase
         $response->assertOk();
         $response->assertViewIs('insureds.index');
     }
+
+    /**
+     * Test the search method.
+     *
+     * @return void
+     */
+    public function testSearch()
+    {
+        $user = User::factory()->create();
+        $response = $this
+            ->actingAs($user)
+            ->get(route('insureds.search'));
+        $response->assertOk();
+    }
 }
