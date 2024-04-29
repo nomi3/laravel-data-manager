@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Insured;
-use Illuminate\Support\Facades\Log;
 
 class InsuredController extends Controller
 {
@@ -15,6 +14,7 @@ class InsuredController extends Controller
     public function index()
     {
         $insureds = Insured::all();
+
         return view('insureds.index', [
             'insureds' => $insureds,
         ]);

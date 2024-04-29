@@ -2,13 +2,14 @@
 
 namespace Tests\Http\Controllers;
 
-use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class InsuredControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * Test the index method.
      *
