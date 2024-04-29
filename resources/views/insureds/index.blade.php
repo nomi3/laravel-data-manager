@@ -1,4 +1,25 @@
 <style>
+    #searchForm {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    #searchForm input[type="text"] {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        width: calc(33% - 12px);
+    }
+
+    #searchForm input[type="text"]:focus {
+        border-color: #0056b3;
+        outline: none;
+    }
     #resultsTable {
         width: 100%;
         border-collapse: collapse;
