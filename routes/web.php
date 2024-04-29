@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('insureds')->name('insureds.')->group(function () {
     Route::get('/', [InsuredController::class, 'index'])->name('index');
+    Route::get('/search', [InsuredController::class, 'search'])->name('search');
 });
 
 require __DIR__.'/auth.php';

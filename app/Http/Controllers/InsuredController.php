@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Insured;
+use App\Usecases\Insured\Search;
+use Illuminate\Http\Request;
 
 class InsuredController extends Controller
 {
@@ -66,5 +68,12 @@ class InsuredController extends Controller
     public function destroy(Insured $insured)
     {
         //
+    }
+
+    public function search(
+        Request $request,
+        Search $usecase
+    ) {
+        return response()->json($usecase($request->query()));
     }
 }
