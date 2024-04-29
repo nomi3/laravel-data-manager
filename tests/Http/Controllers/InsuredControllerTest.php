@@ -5,6 +5,7 @@ namespace Tests\Http\Controllers;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -81,27 +82,29 @@ class InsuredControllerTest extends TestCase
      */
     public function testStore()
     {
+        Log::debug('testStore');
         $user = User::factory()->create();
         $file = new UploadedFile(
-            public_path('test_data.csv'),
-            'test_data.csv',
+            public_path('test_sample_data.csv'),
+            'test_sample_data.csv',
             'text/csv',
             null,
             true
         );
-        $this->actingAs($user)->post(route('insureds.store'), [
+        $response = $this->actingAs($user)->post(route('insureds.store'), [
             'csv_file' => $file,
         ]);
+        $response->assertRedirect(route('insureds.index'));
         $this->assertDatabaseHas('insureds', [
-            'name' => '田中太郎',
+            'name' => 'sub1',
         ]);
     }
 
     public function testStoreWithoutLogin()
     {
         $file = new UploadedFile(
-            public_path('test_data.csv'),
-            'test_data.csv',
+            public_path('test_sample_data.csv'),
+            'test_sample_data.csv',
             'text/csv',
             null,
             true

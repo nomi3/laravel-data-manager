@@ -7,6 +7,7 @@ use App\Models\Insured;
 use App\Usecases\Insured\Search;
 use App\Usecases\Insured\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class InsuredController extends Controller
 {
@@ -28,6 +29,7 @@ class InsuredController extends Controller
         StoreInsuredRequest $request,
         Store $usecase
     ) {
+        Log::info('InsuredController::store');
         $usecase($request->file('csv_file'));
 
         return redirect()->route('insureds.index');
