@@ -26,6 +26,12 @@ class InsuredControllerTest extends TestCase
         $response->assertViewIs('insureds.index');
     }
 
+    public function testIndexWithoutLogin()
+    {
+        $response = $this->get(route('insureds.index'));
+        $response->assertRedirect(route('login'));
+    }
+
     /**
      * Test the search method.
      *
@@ -38,6 +44,12 @@ class InsuredControllerTest extends TestCase
             ->actingAs($user)
             ->get(route('insureds.search'));
         $response->assertOk();
+    }
+
+    public function testSearchWithoutLogin()
+    {
+        $response = $this->get(route('insureds.search'));
+        $response->assertRedirect(route('login'));
     }
 
     /**
@@ -55,12 +67,36 @@ class InsuredControllerTest extends TestCase
         $response->assertViewIs('insureds.create');
     }
 
+    public function testCreateWithoutLogin()
+    {
+        $response = $this->get(route('insureds.create'));
+        $response->assertRedirect(route('login'));
+    }
+
     /**
      * Test the store method.
      *
      * @return void
      */
     public function testStore()
+    {
+        $user = User::factory()->create();
+        $file = new UploadedFile(
+            public_path('test_data.csv'),
+            'test_data.csv',
+            'text/csv',
+            null,
+            true
+        );
+        $this->actingAs($user)->post(route('insureds.store'), [
+            'csv_file' => $file,
+        ]);
+        $this->assertDatabaseHas('insureds', [
+            'name' => '田中太郎',
+        ]);
+    }
+
+    public function testStoreWithoutLogin()
     {
         $file = new UploadedFile(
             public_path('test_data.csv'),
@@ -69,11 +105,9 @@ class InsuredControllerTest extends TestCase
             null,
             true
         );
-        $this->post(route('insureds.store'), [
+        $response = $this->post(route('insureds.store'), [
             'csv_file' => $file,
         ]);
-        $this->assertDatabaseHas('insureds', [
-            'name' => '田中太郎',
-        ]);
+        $response->assertRedirect(route('login'));
     }
 }

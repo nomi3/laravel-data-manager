@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInsuredRequest;
-use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Insured;
 use App\Usecases\Insured\Search;
 use App\Usecases\Insured\Store;
@@ -41,38 +40,6 @@ class InsuredController extends Controller
         $usecase($request->file('csv_file'));
 
         return redirect()->route('insureds.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Insured $insured)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Insured $insured)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateInsuredRequest $request, Insured $insured)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Insured $insured)
-    {
-        //
     }
 
     public function search(
