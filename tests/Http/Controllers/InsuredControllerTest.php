@@ -117,6 +117,7 @@ class InsuredControllerTest extends TestCase
         $user = User::factory()->create();
         $response = $this->actingAs($user)->post(route('insureds.store'));
         $response->assertStatus(302);
+        $response->assertSessionHasErrors(['csv_file' => 'CSVファイルのアップロードは必須です。']);
     }
 
     public function testStoreWithInvalidFile()
@@ -128,6 +129,6 @@ class InsuredControllerTest extends TestCase
             'csv_file' => $file,
         ]);
         $response->assertStatus(302);
-        $response->assertSessionHasErrors('csv_file');
+        $response->assertSessionHasErrors(['csv_file' => 'アップロードされたファイルは、CSV形式である必要があります。']);
     }
 }

@@ -26,4 +26,18 @@ class StoreInsuredRequest extends FormRequest
             'csv_file' => 'required|file|mimes:csv',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'csv_file.required' => 'CSVファイルのアップロードは必須です。',
+            'csv_file.file' => '有効なファイルをアップロードしてください。',
+            'csv_file.mimes' => 'アップロードされたファイルは、CSV形式である必要があります。',
+        ];
+    }
 }
