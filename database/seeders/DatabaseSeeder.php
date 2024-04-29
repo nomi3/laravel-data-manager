@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Insured;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,15 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
+        Insured::factory()->create([
+            'name' => 'Test Insured',
+            'first_name_kana' => 'テスト',
+            'last_name_kana' => 'インシュアード',
+            'insurance_card_symbol' => 1234,
+            'insurance_card_number' => 1234567890,
             'email' => 'test@example.com',
         ]);
     }
