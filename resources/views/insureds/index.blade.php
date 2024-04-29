@@ -162,73 +162,73 @@
                             </tbody>
                         </table>
                     </div>
-                    <script>
-                        function fetchData() {
-                            const form = document.getElementById('searchForm');
-                            const formData = new FormData(form);
-                            const searchParams = new URLSearchParams(formData).toString();
-
-                            fetch(`/insureds/search?${searchParams}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                const tableBody = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
-                                tableBody.innerHTML = '';
-                                data.forEach(item => {
-                                    const row = `<tr>
-                                        <td>${checkNull(item.name)}</td>
-                                        <td>${checkNull(item.last_name_kana)}</td>
-                                        <td>${checkNull(item.first_name_kana)}</td>
-                                        <td>${checkNull(item.email)}</td>
-                                        <td>${checkNull(item.insurance_card_number)}</td>
-                                        <td>${checkNull(item.insurance_card_symbol)}</td>
-                                        <td>${checkNull(item.principal_insurer)}</td>
-                                        <td>${checkNull(item.affiliated_insurer)}</td>
-                                        <td>${checkNull(item.insurer_number)}</td>
-                                        <td>${checkNull(item.support_level)}</td>
-                                        <td>${checkNull(item.gender)}</td>
-                                        <td>${checkNull(item.birth_date)}</td>
-                                        <td>${checkNull(item.age)}</td>
-                                        <td>${checkNull(item.checkup_date)}</td>
-                                        <td>${checkNull(item.height)}</td>
-                                        <td>${checkNull(item.weight)}</td>
-                                        <td>${checkNull(item.bmi)}</td>
-                                        <td>${checkNull(item.waist)}</td>
-                                        <td>${checkNull(item.systolic1)}</td>
-                                        <td>${checkNull(item.systolic2)}</td>
-                                        <td>${checkNull(item.systolic_other)}</td>
-                                        <td>${checkNull(item.diastolic1)}</td>
-                                        <td>${checkNull(item.diastolic2)}</td>
-                                        <td>${checkNull(item.diastolic_other)}</td>
-                                        <td>${checkNull(item.triglycerides)}</td>
-                                        <td>${checkNull(item.fasting_triglycerides)}</td>
-                                        <td>${checkNull(item.casual_triglycerides)}</td>
-                                        <td>${checkNull(item.hdl_cholesterol)}</td>
-                                        <td>${checkNull(item.ldl_cholesterol)}</td>
-                                        <td>${checkNull(item.got)}</td>
-                                        <td>${checkNull(item.gpt)}</td>
-                                        <td>${checkNull(item.gamma_gt)}</td>
-                                        <td>${checkNull(item.fasting_glucose)}</td>
-                                        <td>${checkNull(item.casual_glucose)}</td>
-                                        <td>${checkNull(item.hba1c)}</td>
-                                        <td>${checkNull(item.medication1)}</td>
-                                        <td>${checkNull(item.medication2)}</td>
-                                        <td>${checkNull(item.medication3)}</td>
-                                        <td>${checkNull(item.smoking)}</td>
-                                        <td>${checkNull(item.initial_interview_date)}</td>
-                                        <td>${checkNull(item.initial_interview_time)}</td>
-                                        <td>${checkNull(item.characteristics)}</td>
-                                        </tr>`;
-                                    tableBody.innerHTML += row;
-                                });
-                            })
-                            .catch(error => console.error('Error:', error));
-                        }
-                        function checkNull(value) {
-                            return value === null || value === undefined ? '' : value;
-                        }
-                    </script>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+<script>
+    function fetchData() {
+        const form = document.getElementById('searchForm');
+        const formData = new FormData(form);
+        const searchParams = new URLSearchParams(formData).toString();
+
+        fetch(`/insureds/search?${searchParams}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `<tr>
+                    <td>${checkNull(item.name)}</td>
+                    <td>${checkNull(item.last_name_kana)}</td>
+                    <td>${checkNull(item.first_name_kana)}</td>
+                    <td>${checkNull(item.email)}</td>
+                    <td>${checkNull(item.insurance_card_number)}</td>
+                    <td>${checkNull(item.insurance_card_symbol)}</td>
+                    <td>${checkNull(item.principal_insurer)}</td>
+                    <td>${checkNull(item.affiliated_insurer)}</td>
+                    <td>${checkNull(item.insurer_number)}</td>
+                    <td>${checkNull(item.support_level)}</td>
+                    <td>${checkNull(item.gender)}</td>
+                    <td>${checkNull(item.birth_date)}</td>
+                    <td>${checkNull(item.age)}</td>
+                    <td>${checkNull(item.checkup_date)}</td>
+                    <td>${checkNull(item.height)}</td>
+                    <td>${checkNull(item.weight)}</td>
+                    <td>${checkNull(item.bmi)}</td>
+                    <td>${checkNull(item.waist)}</td>
+                    <td>${checkNull(item.systolic1)}</td>
+                    <td>${checkNull(item.systolic2)}</td>
+                    <td>${checkNull(item.systolic_other)}</td>
+                    <td>${checkNull(item.diastolic1)}</td>
+                    <td>${checkNull(item.diastolic2)}</td>
+                    <td>${checkNull(item.diastolic_other)}</td>
+                    <td>${checkNull(item.triglycerides)}</td>
+                    <td>${checkNull(item.fasting_triglycerides)}</td>
+                    <td>${checkNull(item.casual_triglycerides)}</td>
+                    <td>${checkNull(item.hdl_cholesterol)}</td>
+                    <td>${checkNull(item.ldl_cholesterol)}</td>
+                    <td>${checkNull(item.got)}</td>
+                    <td>${checkNull(item.gpt)}</td>
+                    <td>${checkNull(item.gamma_gt)}</td>
+                    <td>${checkNull(item.fasting_glucose)}</td>
+                    <td>${checkNull(item.casual_glucose)}</td>
+                    <td>${checkNull(item.hba1c)}</td>
+                    <td>${checkNull(item.medication1)}</td>
+                    <td>${checkNull(item.medication2)}</td>
+                    <td>${checkNull(item.medication3)}</td>
+                    <td>${checkNull(item.smoking)}</td>
+                    <td>${checkNull(item.initial_interview_date)}</td>
+                    <td>${checkNull(item.initial_interview_time)}</td>
+                    <td>${checkNull(item.characteristics)}</td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    function checkNull(value) {
+        return value === null || value === undefined ? '' : value;
+    }
+</script>
