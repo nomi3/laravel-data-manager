@@ -6,6 +6,7 @@ use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Insured;
 use App\Usecases\Insured\Search;
+use App\Usecases\Insured\Store;
 use Illuminate\Http\Request;
 
 class InsuredController extends Controller
@@ -33,9 +34,13 @@ class InsuredController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInsuredRequest $request)
-    {
-        //
+    public function store(
+        StoreInsuredRequest $request,
+        Store $usecase
+    ) {
+        $usecase($request->file('csv_file'));
+
+        return redirect()->route('insureds.index');
     }
 
     /**
