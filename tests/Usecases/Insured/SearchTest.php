@@ -2,9 +2,9 @@
 
 namespace Tests\Usecases\Insured;
 
+use App\Models\Insured;
 use App\Usecases\Insured\Search;
 use Tests\TestCase;
-use App\Models\Insured;
 
 class SearchTest extends TestCase
 {
