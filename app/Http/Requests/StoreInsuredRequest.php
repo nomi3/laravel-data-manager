@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreInsuredRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreInsuredRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreInsuredRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'csv_file' => 'required|file|mimes:csv',
         ];
     }
 }
