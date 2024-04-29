@@ -69,9 +69,6 @@ class Store
                     $rowData[$attribute] = $worksheet->getCell($column.$row->getRowIndex())->getValue();
                 }
             }
-
-            Log::info("Extracted data - Name: {$rowData['name']}, Email: {$rowData['email']}, Number: {$rowData['insurance_card_number']}");
-
             $insured = new Insured($rowData);
             $insured->save();
         }
