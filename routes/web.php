@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('insureds')->name('insureds.')->group(function () {
     Route::get('/', [InsuredController::class, 'index'])->name('index');
+    Route::post('/', [InsuredController::class, 'store'])->name('store');
+    Route::get('/create', [InsuredController::class, 'create'])->name('create');
     Route::get('/search', [InsuredController::class, 'search'])->name('search');
 });
 
