@@ -38,4 +38,19 @@ class InsuredControllerTest extends TestCase
             ->get(route('insureds.search'));
         $response->assertOk();
     }
+
+    /**
+     * Test the create method.
+     *
+     * @return void
+     */
+    public function testCreate()
+    {
+        $user = User::factory()->create();
+        $response = $this
+            ->actingAs($user)
+            ->get(route('insureds.create'));
+        $response->assertOk();
+        $response->assertViewIs('insureds.create');
+    }
 }

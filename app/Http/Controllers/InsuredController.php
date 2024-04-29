@@ -27,7 +27,7 @@ class InsuredController extends Controller
      */
     public function create()
     {
-        //
+        return view('insureds.create');
     }
 
     /**
