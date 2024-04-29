@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreInsuredRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreInsuredRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,21 @@ class StoreInsuredRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'csv_file' => 'required|file|mimes:csv',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'csv_file.required' => 'CSVファイルのアップロードは必須です。',
+            'csv_file.file' => '有効なファイルをアップロードしてください。',
+            'csv_file.mimes' => 'アップロードされたファイルは、CSV形式である必要があります。',
         ];
     }
 }

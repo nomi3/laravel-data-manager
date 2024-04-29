@@ -5,6 +5,7 @@ namespace Tests\Http\Controllers;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class InsuredControllerTest extends TestCase
@@ -109,5 +110,25 @@ class InsuredControllerTest extends TestCase
             'csv_file' => $file,
         ]);
         $response->assertRedirect(route('login'));
+    }
+
+    public function testStoreWithoutCsvFile()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post(route('insureds.store'));
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['csv_file' => 'CSVファイルのアップロードは必須です。']);
+    }
+
+    public function testStoreWithInvalidFile()
+    {
+        Storage::fake('local');
+        $user = User::factory()->create();
+        $file = UploadedFile::fake()->image('invalid_file.jpg');
+        $response = $this->actingAs($user)->post(route('insureds.store'), [
+            'csv_file' => $file,
+        ]);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['csv_file' => 'アップロードされたファイルは、CSV形式である必要があります。']);
     }
 }
