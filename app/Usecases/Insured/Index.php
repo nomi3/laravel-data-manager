@@ -9,7 +9,7 @@ class Index
 {
     public function __invoke(): Collection
     {
-        $insureds = Insured::all();
+        $insureds = Insured::latest()->get();
 
         return $insureds;
     }
