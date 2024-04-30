@@ -37,18 +37,18 @@
         }
 
         .link {
-            color: #2563eb;
+            color: #fff;
             text-decoration: none;
             font-size: 1.25rem;
-            margin-top: 2rem;
             display: inline-block;
-            background: #e0f2fe;
-            padding: 8px 16px;
+            background: #2563eb;
+            padding: 10px 20px;
             border-radius: 8px;
+            transition: background 0.3s ease;
         }
 
         .link:hover {
-            background: #bfdbfe;
+            background: #1c4fc9;
         }
 
         .footer {
@@ -60,28 +60,32 @@
             background: #f3f4f6;
             border-top: 1px solid #e5e7eb;
         }
+
+        .description {
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1 class="title">データ管理システム</h1>
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ route('insureds.index') }}" class="text-sm text-gray-700 underline">保険証データ一覧</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">ログイン</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">新規登録</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+            <p class="description">保険証データをCSVでアップロードし、簡単に管理が可能です。</p>
         </header>
 
-        <p>保険証データをCSVでアップロードし、簡単に管理が可能です。</p>
+        @if (Route::has('login'))
+            <div>
+                @auth
+                    <a href="{{ route('insureds.index') }}" class="link">保険証データ一覧</a>
+                @else
+                    <a href="{{ route('login') }}" class="link">ログイン</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="link">新規登録</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
     </div>
 </body>
 </html>
