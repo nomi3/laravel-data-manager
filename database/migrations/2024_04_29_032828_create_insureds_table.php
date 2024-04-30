@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable(); // メールアドレス
             $table->string('principal_insurer'); // 委託元保険者
             $table->string('affiliated_insurer'); // 所属保険者
-            $table->integer('insurer_number'); // 保険者番号
+            $table->string('insurer_number'); // 保険者番号
             $table->string('support_level'); // 支援レベル
             $table->string('gender'); // 性別
             $table->date('birth_date'); // 生年月日

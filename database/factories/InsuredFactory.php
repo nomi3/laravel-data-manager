@@ -27,7 +27,7 @@ class InsuredFactory extends Factory
             'affiliated_insurer' => fake()->company(),
             'insurer_number' => fake()->randomNumber(7),
             'support_level' => fake()->word(),
-            'gender' => fake()->randomElement(['男性', '女性']),
+            'gender' => fake()->randomElement(['男', '女']),
             'birth_date' => fake()->date(),
             'age' => fake()->numberBetween(0, 120),
             'checkup_date' => fake()->date(),
