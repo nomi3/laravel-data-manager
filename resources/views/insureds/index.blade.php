@@ -56,6 +56,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    @if (session('success'))
+                        <div class="mb-4 text-sm text-green-600">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <form id="searchForm" class="my-4">
                         <input type="text" name="name" placeholder="漢字氏名" oninput="fetchData()" class="mr-2">
                         <input type="text" name="last_name_kana" placeholder="カナ（姓）" oninput="fetchData()" class="mr-2">

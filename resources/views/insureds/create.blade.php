@@ -18,6 +18,9 @@
                             @error('csv_file')
                                 <span class="text-red-500 text-xs italic">{{ $message }}</span>
                             @enderror
+                            @if (session('error'))
+                                <span class="text-red-500 text-xs italic">{{ session('error') }}</span>
+                            @endif
                         </div>
                         <div class="flex items-center justify-between">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

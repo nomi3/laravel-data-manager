@@ -28,9 +28,13 @@ class InsuredController extends Controller
         StoreInsuredRequest $request,
         Store $usecase
     ) {
-        $usecase($request->file('csv_file'));
+        $result = $usecase($request->file('csv_file'));
 
-        return redirect()->route('insureds.index');
+        if (!$result) {
+            return redirect()->route('insureds.create')->with('error', 'CSVファイルの読み込みに失敗しました。ファイルを確認してください。');
+        }
+
+        return redirect()->route('insureds.index')->with('success', 'CSVファイルが正常に処理されました。');
     }
 
     public function search(
