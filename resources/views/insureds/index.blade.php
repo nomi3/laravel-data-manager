@@ -155,10 +155,10 @@
                                         <td>{{ $insured->fasting_glucose }}</td>
                                         <td>{{ $insured->casual_glucose }}</td>
                                         <td>{{ $insured->hba1c }}</td>
-                                        <td>{{ $insured->medication1 }}</td>
-                                        <td>{{ $insured->medication2 }}</td>
-                                        <td>{{ $insured->medication3 }}</td>
-                                        <td>{{ $insured->smoking }}</td>
+                                        <td>{{ $insured->medication1 ? 'はい' : 'いいえ' }}</td>
+                                        <td>{{ $insured->medication2 ? 'はい' : 'いいえ' }}</td>
+                                        <td>{{ $insured->medication3 ? 'はい' : 'いいえ' }}</td>
+                                        <td>{{ $insured->smoking ? 'あり' : 'なし' }}</td>
                                         <td>{{ $insured->initial_interview_date }}</td>
                                         <td>{{ $insured->initial_interview_time }}</td>
                                         <td>{{ $insured->characteristics }}</td>
@@ -220,10 +220,10 @@
                     <td>${checkNull(item.fasting_glucose)}</td>
                     <td>${checkNull(item.casual_glucose)}</td>
                     <td>${checkNull(item.hba1c)}</td>
-                    <td>${checkNull(item.medication1)}</td>
-                    <td>${checkNull(item.medication2)}</td>
-                    <td>${checkNull(item.medication3)}</td>
-                    <td>${checkNull(item.smoking)}</td>
+                    <td>${booleanToText(item.medication1)}</td>
+                    <td>${booleanToText(item.medication2)}</td>
+                    <td>${booleanToText(item.medication3)}</td>
+                    <td>${booleanToText(item.smoking, 'あり', 'なし')}</td>
                     <td>${checkNull(item.initial_interview_date)}</td>
                     <td>${checkNull(item.initial_interview_time)}</td>
                     <td>${checkNull(item.characteristics)}</td>
@@ -235,5 +235,8 @@
     }
     function checkNull(value) {
         return value === null || value === undefined ? '' : value;
+    }
+    function booleanToText(value, trueText = 'はい', falseText = 'いいえ') {
+        return value ? 'はい' : 'いいえ';
     }
 </script>
