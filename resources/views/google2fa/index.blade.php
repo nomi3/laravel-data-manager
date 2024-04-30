@@ -12,7 +12,7 @@
     @endphp
 
     <!-- Title -->
-    <h1 class="text-center text-3xl font-bold mt-6 mb-4">2段階認証</h1>
+    <h1 class="text-center text-3xl font-bold mt-6 mb-4">2要素認証</h1>
 
     <!-- QR Code Display -->
     <p class="text-center">Google Authenticatorアプリでバーコードを読み取り、ワンタイムパスワードを入力してください。</p>
