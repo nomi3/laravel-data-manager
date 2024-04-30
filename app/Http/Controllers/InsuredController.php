@@ -43,6 +43,6 @@ class InsuredController extends Controller
         SearchRequest $request,
         Search $usecase
     ): JsonResponse {
-        return response()->json($usecase($request->query()));
+        return response()->json($usecase($request->validated()));
     }
 }
