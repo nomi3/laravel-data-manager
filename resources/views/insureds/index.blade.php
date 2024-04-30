@@ -39,10 +39,6 @@
     #resultsTable tr:nth-child(even) {
         background-color: #f2f2f2;
     }
-
-    #resultsTable tr:hover {
-        background-color: #ddd;
-    }
 </style>
 
 <x-app-layout>

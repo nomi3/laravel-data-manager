@@ -131,7 +131,7 @@ class InsuredControllerTest extends TestCase
             'csv_file' => $file,
         ]);
         $response->assertStatus(302);
-        $response->assertSessionHasErrors(['csv_file' => 'アップロードされたファイルは、CSV形式である必要があります。']);
+        $response->assertSessionHasErrors(['csv_file' => 'アップロードするファイルは、CSV形式である必要があります。']);
     }
 
     public function testStoreWithLackingFields()
