@@ -65,7 +65,7 @@
 <body>
     <div class="container">
         <header>
-            <h1 class="title">保険証データ管理システム</h1>
+            <h1 class="title">データ管理システム</h1>
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -81,7 +81,7 @@
             @endif
         </header>
 
-        <p>保険証データを効率的に管理し、簡単にアクセス、更新が可能です。</p>
+        <p>保険証データをCSVでアップロードし、簡単に管理が可能です。</p>
     </div>
 </body>
 </html>
