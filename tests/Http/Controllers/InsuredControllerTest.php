@@ -93,6 +93,7 @@ class InsuredControllerTest extends TestCase
             'csv_file' => $file,
         ]);
         $response->assertRedirect(route('insureds.index'));
+        $response->assertSessionHas('success', 'CSVファイルが正常に処理されました。');
         $this->assertDatabaseHas('insureds', [
             'name' => 'sub1',
         ]);
@@ -131,5 +132,22 @@ class InsuredControllerTest extends TestCase
         ]);
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['csv_file' => 'アップロードされたファイルは、CSV形式である必要があります。']);
+    }
+
+    public function testStoreWithLackingFields()
+    {
+        $user = User::factory()->create();
+        $file = new UploadedFile(
+            base_path('tests/storage/sample_data_with_lacking_fields.csv'),
+            'sample_data_with_lacking_fields.csv',
+            'text/csv',
+            null,
+            true
+        );
+        $response = $this->actingAs($user)->post(route('insureds.store'), [
+            'csv_file' => $file,
+        ]);
+        $response->assertRedirect(route('insureds.create'));
+        $response->assertSessionHas('error', 'CSVファイルの読み込みに失敗しました。ファイルを確認してください。');
     }
 }

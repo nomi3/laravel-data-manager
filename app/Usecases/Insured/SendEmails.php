@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SendEmails
 {
-    public function __invoke()
+    public function __invoke(): void
     {
         $insureds = Insured::whereNotNull('email')->get();
         foreach ($insureds as $insured) {
