@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SearchInsuredRequest;
-use App\Http\Requests\StoreInsuredRequest;
+use App\Http\Requests\Insured\SearchRequest;
+use App\Http\Requests\Insured\StoreRequest;
 use App\Usecases\Insured\Index;
 use App\Usecases\Insured\Search;
 use App\Usecases\Insured\Store;
@@ -27,7 +27,7 @@ class InsuredController extends Controller
     }
 
     public function store(
-        StoreInsuredRequest $request,
+        StoreRequest $request,
         Store $usecase
     ): RedirectResponse {
         $result = $usecase($request->file('csv_file'));
@@ -40,7 +40,7 @@ class InsuredController extends Controller
     }
 
     public function search(
-        SearchInsuredRequest $request,
+        SearchRequest $request,
         Search $usecase
     ): JsonResponse {
         return response()->json($usecase($request->query()));
