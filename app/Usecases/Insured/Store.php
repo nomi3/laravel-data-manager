@@ -3,11 +3,12 @@
 namespace App\Usecases\Insured;
 
 use App\Models\Insured;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Illuminate\Support\Facades\DB;
+
 class Store
 {
     private const HEADERS_TO_ATTRIBUTES = [
@@ -67,8 +68,10 @@ class Store
         } catch (\Exception $e) {
             Log::error('Failed to read spreadsheet: '.$e->getMessage());
             DB::rollBack();
+
             return false;
         }
+
         return true;
     }
 

@@ -30,7 +30,7 @@ class InsuredController extends Controller
     ) {
         $result = $usecase($request->file('csv_file'));
 
-        if (!$result) {
+        if (! $result) {
             return redirect()->route('insureds.create')->with('error', 'CSVファイルの読み込みに失敗しました。ファイルを確認してください。');
         }
 
