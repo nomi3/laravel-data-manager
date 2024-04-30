@@ -12,7 +12,7 @@ class StoreTest extends TestCase
     {
         $usecase = new Store();
         $file = new UploadedFile(
-            public_path('test_sample_data.csv'),
+            base_path('tests/storage/test_sample_data.csv'),
             'test_sample_data.csv',
             'text/csv',
             null,

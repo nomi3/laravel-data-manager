@@ -83,7 +83,7 @@ class InsuredControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $file = new UploadedFile(
-            public_path('test_sample_data.csv'),
+            base_path('tests/storage/test_sample_data.csv'),
             'test_sample_data.csv',
             'text/csv',
             null,
@@ -101,7 +101,7 @@ class InsuredControllerTest extends TestCase
     public function testStoreWithoutLogin()
     {
         $file = new UploadedFile(
-            public_path('test_sample_data.csv'),
+            base_path('tests/storage/test_sample_data.csv'),
             'test_sample_data.csv',
             'text/csv',
             null,
