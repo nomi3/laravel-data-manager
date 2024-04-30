@@ -5,6 +5,8 @@ namespace App\Usecases\Insured;
 use App\Models\Insured;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Store
 {
@@ -53,25 +55,22 @@ class Store
         '対象者の特徴' => 'characteristics',
     ];
 
-    public function __invoke($csvFile)
+    public function __invoke(string $csvFile): bool
     {
         try {
             $spreadsheet = $this->loadSpreadsheet($csvFile);
+            $worksheet = $spreadsheet->getActiveSheet();
+            $headers = $this->extractHeaders($worksheet);
+            $this->processRows($worksheet, $headers);
         } catch (\Exception $e) {
-            Log::error('Failed to load spreadsheet: '.$e->getMessage());
+            Log::error('Failed to read spreadsheet: '.$e->getMessage());
 
             return false;
         }
-
-        $worksheet = $spreadsheet->getActiveSheet();
-        $headers = $this->extractHeaders($worksheet);
-
-        $this->processRows($worksheet, $headers);
-
         return true;
     }
 
-    private function loadSpreadsheet($csvFile)
+    private function loadSpreadsheet(string $csvFile): Spreadsheet
     {
         $reader = new Csv();
         $reader->setEnclosure('"');
@@ -81,7 +80,7 @@ class Store
         return $reader->load($csvFile);
     }
 
-    private function extractHeaders($worksheet)
+    private function extractHeaders(Worksheet $worksheet): array
     {
         $headerRow = $worksheet->getRowIterator(1)->current();
         $cellIterator = $headerRow->getCellIterator();
@@ -95,7 +94,7 @@ class Store
         return $headers;
     }
 
-    private function processRows($worksheet, $headers)
+    private function processRows(Worksheet $worksheet, array $headers): void
     {
         foreach ($worksheet->getRowIterator(2) as $row) {
             $rowData = [];
@@ -115,7 +114,7 @@ class Store
         }
     }
 
-    private function getBooleanFromStr($str)
+    private function getBooleanFromStr(string $str): bool
     {
         return in_array($str, ['はい', 'あり']);
     }
