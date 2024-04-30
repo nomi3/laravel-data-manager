@@ -3,6 +3,7 @@
 namespace App\Usecases\Insured;
 
 use App\Models\Insured;
+use Illuminate\Database\Eloquent\Collection;
 
 class Search
 {
@@ -15,7 +16,7 @@ class Search
         'insurance_card_symbol',
     ];
 
-    public function __invoke(array $columns)
+    public function __invoke(array $columns): Collection
     {
         $query = Insured::query();
 
