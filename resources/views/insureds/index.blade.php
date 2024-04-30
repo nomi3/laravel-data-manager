@@ -174,9 +174,17 @@
         const formData = new FormData(form);
         const searchParams = new URLSearchParams(formData).toString();
 
-        fetch(`/insureds/search?${searchParams}`)
+        fetch(`/insureds/search?${searchParams}`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
         .then(response => response.json())
         .then(data => {
+            if (data.errors) {
+                const errorMessage = Object.values(data.errors)[0].join(', ');
+                throw new Error(errorMessage);
+            }
             const tableBody = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = '';
             data.forEach(item => {
@@ -227,7 +235,10 @@
                 tableBody.innerHTML += row;
             });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert(error.message);
+        });
     }
     function checkNull(value) {
         return value === null || value === undefined ? '' : value;
