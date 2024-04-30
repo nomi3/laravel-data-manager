@@ -53,6 +53,26 @@ class InsuredControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
+    public function testSearchWithQuery()
+    {
+        $user = User::factory()->create();
+        $response = $this
+            ->actingAs($user)
+            ->get(route('insureds.search', ['name' => 'sub1']));
+        $response->assertOk();
+    }
+
+    public function testSearchWithLongQuery()
+    {
+        $user = User::factory()->create();
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])
+            ->actingAs($user)
+            ->get(route('insureds.search', ['name' => str_repeat('a', 256)]));
+        $response->assertStatus(422);
+    }
+
     /**
      * Test the create method.
      *

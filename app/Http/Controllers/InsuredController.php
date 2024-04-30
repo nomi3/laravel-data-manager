@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchInsuredRequest;
 use App\Http\Requests\StoreInsuredRequest;
 use App\Usecases\Insured\Index;
 use App\Usecases\Insured\Search;
 use App\Usecases\Insured\Store;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class InsuredController extends Controller
@@ -40,7 +40,7 @@ class InsuredController extends Controller
     }
 
     public function search(
-        Request $request,
+        SearchInsuredRequest $request,
         Search $usecase
     ): JsonResponse {
         return response()->json($usecase($request->query()));
