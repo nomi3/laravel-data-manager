@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-
+use Illuminate\Support\Facades\DB;
 class Store
 {
     private const HEADERS_TO_ATTRIBUTES = [
@@ -57,14 +57,16 @@ class Store
 
     public function __invoke(string $csvFile): bool
     {
+        DB::beginTransaction();
         try {
             $spreadsheet = $this->loadSpreadsheet($csvFile);
             $worksheet = $spreadsheet->getActiveSheet();
             $headers = $this->extractHeaders($worksheet);
             $this->processRows($worksheet, $headers);
+            DB::commit();
         } catch (\Exception $e) {
             Log::error('Failed to read spreadsheet: '.$e->getMessage());
-
+            DB::rollBack();
             return false;
         }
         return true;

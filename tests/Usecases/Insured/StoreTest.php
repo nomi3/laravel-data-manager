@@ -20,6 +20,7 @@ class StoreTest extends TestCase
         );
         $result = $usecase($file);
         $this->assertTrue($result);
+        $this->assertDatabaseCount('insureds', 15);
         $this->assertDatabaseHas('insureds', [
             'name' => 'sub1',
         ]);
@@ -44,5 +45,21 @@ class StoreTest extends TestCase
         );
         $result = $usecase($file);
         $this->assertNotTrue($result);
+    }
+
+    public function testRollbackDBWhenFailed()
+    {
+        $this->assertDatabaseCount('insureds', 0);
+        $usecase = new Store();
+        $file = new UploadedFile(
+            base_path('tests/storage/sample_data_with_lacking_fields.csv'),
+            'sample_data_with_lacking_fields.csv',
+            'text/csv',
+            null,
+            true
+        );
+        $result = $usecase($file);
+        $this->assertNotTrue($result);
+        $this->assertDatabaseCount('insureds', 0);
     }
 }
