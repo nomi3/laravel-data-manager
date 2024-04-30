@@ -11,15 +11,17 @@
         );
     @endphp
 
+    <!-- Title -->
+    <h1 class="text-center text-3xl font-bold mt-6 mb-4">2段階認証</h1>
+
     <!-- QR Code Display -->
-    <p class="text-center mt-4">2段階認証</p>
-    <p class="text-center mt-4">Google Authenticatorアプリでバーコードを読み取り、ワンタイムパスワードを入力してください。</p>
+    <p class="text-center">Google Authenticatorアプリでバーコードを読み取り、ワンタイムパスワードを入力してください。</p>
     <div class="flex items-center justify-center my-8">
         {!! $qrCodeUrl !!}
     </div>
 
     <!-- App Installation Instructions -->
-    <p class="text-center mt-4">Google Authenticatorのスマホアプリが必要です。以下のリンクからダウンロードしてください。</p>
+    <p class="text-center">Google Authenticatorのスマホアプリが必要です。以下のリンクからダウンロードしてください。</p>
     <div class="flex justify-center mt-4 space-x-4">
         <div>
             <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ja&gl=US" class="text-blue-500 hover:underline">Google Play</a>
