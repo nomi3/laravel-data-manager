@@ -15,5 +15,5 @@ Artisan::command('insured:send-email', function (SendEmails $usecase) {
 
 Schedule::command('insured:send-email')
     ->daily()
-    ->at('10:00')
+    ->at('14:45')
     ->onOneServer();

@@ -55,6 +55,10 @@ key は担当者からもらいます。
 ./vendor/bin/sail npm run dev
 ```
 
+## DB の確認
+
+http://localhost:8080 で phpMyAdmin からデータベースを確認できます。
+
 ## テストについて
 
 ### ディレクトリ構成
