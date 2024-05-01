@@ -31,7 +31,7 @@ docker run --rm \
 
 ### 5. .env ファイルを作成
 
-key は担当者からもらいます。
+decrypt 用の key は担当者が渡すものを使ってください。
 
 ```bash
 ./vendor/bin/sail artisan env:decrypt --key="base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx="
@@ -82,7 +82,9 @@ view ⇄ request ⇄ controller ⇄ usecase ⇄ model
 
 ### request
 
-認可やバリデーションを行うクラスを app/Http/Requests に格納しています。
+app/Http/Requests に格納しています。
+
+認可やシンプルなバリデーションを行います。
 
 ### controller
 
@@ -100,4 +102,4 @@ app/UseCases に格納しています。
 
 app/Models に格納しています。
 
-データベースのテーブルと基本的に 1:1 で対応する想定でいます。
+データベースのテーブルと基本的に 1:1 で対応する想定です。
